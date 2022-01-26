@@ -1,0 +1,32 @@
+G2SUR
+Program to convert gravsoft grids (.gri) to surfer ascii format (.grd)
+Inputs ->
+    Input File's Name with Extension {gravsoft grid file (usually .gri)}.
+    Output FIle's Name with Extension {surfer file name (should be .grd)}.
+
+Short-notations used in program are ->
+    ifile - Input File.
+    ofile - Output File.
+    icontraw - List of Raw Input Content.
+    icont - List of Input Content Line Wise.
+    ficont - List of Final Input Content.
+    templist - Temporary List to Store Data in finlist Para-wise.
+    finlist - Final Formatted List of Elements (Paragraphs) Stored as List Inside a List.
+
+Values notified in program are ->
+    nmax - Maximum number of readings to be executed.
+    rfi1 - Value given in I/P File at (line[0], elem[0]).
+    rfi2 - Value given in I/P File at (line[0], elem[1]).
+    rla1 - Value given in I/P File at (line[0], elem[2]).
+    rla2 - Value given in I/P File at (line[0], elem[3]).
+    dfi  - Value given in I/P File at (line[0], elem[4]).
+    dla  - Value given in I/P File at (line[0], elem[5]).
+    izone - Total Numbers of Zones (paragraphs) in Input File.
+    iell - Total Numbers of Elements in an izone (a paragraph).
+    nn - Floor Value of (rfi2 - rfi1)/dfi + 1.5 {Must be Equals to izone}.
+    ne - Floor Value of (rla2 - rla1)/dla + 1.5 {Must be Equals to iell}.
+    zmin - Minimum Limit of Readings.
+    zmax - Maximum Limit of Readings.
+
+Outputs ->
+    Formatted Output File {ofile.grd}.

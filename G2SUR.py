@@ -22,12 +22,7 @@ icont.pop(0) #removing spaces
 icont.pop(0) #removing spaces
 
 #Converting the values of rfi1, rfi2, rla1, rla2, dfi, dla into Float values
-rfi1= float(rfi1)
-rfi2= float(rfi2)
-rla1= float(rla1)
-rla2= float(rla2)
-dfi= float(dfi)
-dla= float(dla)
+rfi1, rfi2, rla1, rla2, dfi, dla = float(rfi1), float(rfi2), float(rla1), float(rla2), float(dfi), float(dla)
 
 #Deciding iell and izone
 izone = 1
@@ -104,19 +99,28 @@ for listelem in finlist:
 
 finlist.reverse() #Reversing the finlist
 
-# Creating & Formating Output File (.grd)
-countne = 1
-formattedInfo = f'DSAA\n    {ne} {nn}\n    {rla1:.5f} {rla2:.5f}\n    {rfi1:.5f} {rfi2:.5f}\n    {zmin:.2f} {zmax:.2f}\n'
+#Deciding Formatted value if lutm is true
+# formattedInfo = f'DSAA\n    {ne} {nn}\n    {rla1:.5f} {rla2:.5f}\n    {rfi1:.5f} {rfi2:.5f}\n    {zmin:.2f} {zmax:.2f}\n'
+if lutm == True:
+    rfi1, rfi2, rla1, rla2 = round(rfi1), round(rfi2), round(rla1), round(rla2)
+    formattedInfo = f'DSAA\n    {ne} {nn}\n    {rla1:.5f} {rla2:.5f}\n    {rfi1:.5f} {rfi2:.5f}\n    {zmin:.2f} {zmax:.2f}\n'
+else:
+    formattedInfo = f'DSAA\n    {ne} {nn}\n    {rla1:.5f} {rla2:.5f}\n    {rfi1:.5f} {rfi2:.5f}\n    {zmin:.2f} {zmax:.2f}\n'
+
+#Creating & Formating Output File (.grd)
+no_of_columns = 6 #To Print Data in x Columns 
+noc_count = 0 #To count no. of columns printed on each row
 opFileVar = open(ofile, 'w')
 print(formattedInfo, file = opFileVar)
 for listelem in finlist:
     for elem in listelem:
         elem = float(elem)
-        print(format(elem, '.5f'),end=' ',file=opFileVar)
-        countne += 1
-        if countne == 7:
+        print(format(elem, '12.5f'),end=' ',file=opFileVar)
+        noc_count += 1
+        if noc_count == no_of_columns:
             print('',file=opFileVar)
-            countne = 1
+            noc_count = 0
+    noc_count = 0
     print('\n',file=opFileVar)
 opFileVar.close()
 print(f"{ofile} created successfully.")
